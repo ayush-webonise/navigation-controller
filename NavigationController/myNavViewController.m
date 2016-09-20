@@ -38,7 +38,7 @@
             displayDetailsButton.frame = CGRectMake(0, yPosition, 400, 100);
             [displayDetailsButton setTitle:@"" forState:UIControlStateNormal];
             [displayDetailsButton setTag:i];
-            [displayDetailsButton addTarget:self action:@selector(showProductDetails) forControlEvents:UIControlEventTouchUpInside];
+            [displayDetailsButton addTarget:self action:@selector(showProductDetails:) forControlEvents:UIControlEventTouchUpInside];
             UILabel *labelProductName = [[UILabel alloc] initWithFrame:CGRectMake(50, 10, 250, 40)];
             UILabel *labelProductPrice = [[UILabel alloc] initWithFrame:CGRectMake(50, 50, 250, 40)];
             labelProductName.text = [appDelegate.arrayProducts[i] productName];
@@ -52,14 +52,13 @@
 
 }
 
--(void)showProductDetails{
-    //int i;
+
+-(void)showProductDetails:(UIButton*) sender {
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-    appDelegate.stringProductName = [appDelegate.arrayProducts[0] productName];
-    appDelegate.stringProductPrice = [appDelegate.arrayProducts[0] productPrice];
+    appDelegate.stringProductName = [appDelegate.arrayProducts[sender.tag] productName];
+    appDelegate.stringProductPrice = [appDelegate.arrayProducts[sender.tag] productPrice];
     productDetailsViewController *productDetails = [self.storyboard instantiateViewControllerWithIdentifier:@"productDetailsViewController"];
     [self.navigationController pushViewController:productDetails animated:YES];
-    
 }
 
 -(void)addProducts {
